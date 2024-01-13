@@ -130,4 +130,20 @@ public class ArrayDeque<T> {
         }
         System.out.println();
     }
+
+    public boolean equals(Object o) {
+        if (!(o instanceof ArrayDeque)) {
+            return false;
+        }
+        ArrayDeque other = (ArrayDeque) o;
+        if (this.size() != other.size()) {
+            return false;
+        }
+        for (int i = 0; i < size; i++) {
+            if (this.get(i).equals(other.get(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
