@@ -1,5 +1,7 @@
 package deque;
 
+import org.checkerframework.checker.units.qual.A;
+
 public class ArrayDeque<T> {
 
     private static final int GROW_FACTOR = 2;
@@ -105,7 +107,9 @@ public class ArrayDeque<T> {
 
     private void resize(int capacity) {
         T[] temp = (T[]) new Object[capacity];
-        System.arraycopy(items, first, temp, 0, size);
+        for (int i = 0; i < size; i++) {
+            temp[i] = get(i);
+        }
         first = 0;
         last = size - 1;
         items = temp;
