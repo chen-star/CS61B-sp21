@@ -1,7 +1,5 @@
 package deque;
 
-import org.checkerframework.checker.units.qual.A;
-
 public class ArrayDeque<T> {
 
     private static final int GROW_FACTOR = 2;
