@@ -121,10 +121,10 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof LinkedListDeque)) {
+        if (!(o instanceof Deque)) {
             return false;
         }
-        LinkedListDeque other = (LinkedListDeque) o;
+        Deque<T> other = (Deque<T>) o;
         if (this == other) {
             return true;
         }
