@@ -1,6 +1,8 @@
 package deque;
 
-public class ArrayDeque<T> {
+import java.util.Iterator;
+
+public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
 
     private static final int GROW_FACTOR = 2;
     private static final double DOWN_SIZING_THRESHOLD = 0.25;
@@ -17,6 +19,7 @@ public class ArrayDeque<T> {
         size = 0;
     }
 
+    @Override
     public T get(int index) {
         if (index < 0 || index >= size) {
             return null;
@@ -27,6 +30,7 @@ public class ArrayDeque<T> {
     }
 
 
+    @Override
     public void addFirst(T item) {
         if (size == items.length) {
             resize(items.length * GROW_FACTOR);
@@ -46,6 +50,7 @@ public class ArrayDeque<T> {
         size++;
     }
 
+    @Override
     public void addLast(T item) {
         if (size == items.length) {
             resize(items.length * GROW_FACTOR);
@@ -65,6 +70,7 @@ public class ArrayDeque<T> {
         size++;
     }
 
+    @Override
     public T removeFirst() {
         if (isEmpty()) {
             return null;
@@ -84,6 +90,7 @@ public class ArrayDeque<T> {
         return toRemove;
     }
 
+    @Override
     public T removeLast() {
         if (isEmpty()) {
             return null;
@@ -113,14 +120,12 @@ public class ArrayDeque<T> {
         items = temp;
     }
 
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
+    @Override
     public int size() {
         return size;
     }
 
+    @Override
     public void printDeque() {
         for (int i = 0; i < size; i++) {
             System.out.print(get(i));
@@ -129,6 +134,11 @@ public class ArrayDeque<T> {
         System.out.println();
     }
 
+    public Iterator<T> iterator() {
+        return new ArrayDequeIterator();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (!(o instanceof ArrayDeque)) {
             return false;
@@ -143,5 +153,25 @@ public class ArrayDeque<T> {
             }
         }
         return true;
+    }
+
+    private class ArrayDequeIterator implements Iterator<T> {
+
+        private int i;
+
+        public ArrayDequeIterator() {
+            i = 0;
+        }
+
+
+        @Override
+        public boolean hasNext() {
+            return i < size;
+        }
+
+        @Override
+        public T next() {
+            return get(i);
+        }
     }
 }
